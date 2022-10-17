@@ -34,10 +34,11 @@ addDashBoards = (id, dashName) => {
 }
 
 addColumbs = (dashId, columbId, columbName) => {
+
         for (const [key, values] of Object.entries(orgData)) {
             if (key == 'dashBoards') {
                 for (const [key2, values2] of Object.entries(values)) {
-                    if (key2.id === dashId) {
+                    if (key2 === dashId) {
                         for (const [key3, values3] of Object.entries(values2)) {
                             key3 = {
                                 [columbId] : {
@@ -55,7 +56,52 @@ addColumbs = (dashId, columbId, columbName) => {
      
 }
 
+addTask = (dashId, columbId, tasksId) => {
+    for (const [key, values] of Object.entries(orgData)) {
+        if (key == 'dashBoards') {
+            for (const [key2, values2] of Object.entries(values)) {
+                if (key2 === dashId) {
+                    for (const [key3, value3] of Object.entries(values2)) {
+                        if (key3 === columbId ) {
+                            for (const [key4, value4] of Object.entries(3)) {
 
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+ 
+// Data Structure
+/*
+    {
+        theme: color
+        dashboards {
+            [id of dashboard]: {
+                name : string
+                columbs : {
+                    [id of columb] : {
+                        columbName: string
+                        tasks : {
+                            [id of task] : {
+                                taskName : string
+                                description: string
+                                subtask : {
+                                    [id of subtask] : {
+                                        description : string
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+*/
 
 // Possible Bugs to be tested
 // 1) validity of orgData (funcs : addColumbs) after appending keys

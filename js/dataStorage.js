@@ -1,18 +1,9 @@
+
 // Default Data
 data = {
     theme: '#fff',
     dashBoards: {total: 0},
-    columbs: {
-        Todo: {
 
-        },
-        Doing: {
-
-        },
-        Done: {
-
-        },
-    }
 
 }
 

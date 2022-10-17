@@ -1,2 +1,6 @@
-# Todo
-If i make changes here you can see it right? okay cool 
+# Todo                                                                                            
+Today's Tasks
+Prafool's                                                                                            di-was's
+ _________                                                                                         _________
+Create raw HTML                                                                                   Work on Java Script 
+and start designing as much as possible                                                            

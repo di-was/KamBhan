@@ -1,3 +1,4 @@
+// get rid of this
 if (localStorage.getItem('data') === null) {
     let orgData = {
         theme: '#fff',
@@ -52,19 +53,62 @@ addColumbs = (dashId, columbId, columbName) => {
                 }
             }
         }
-        localStorage.orgData = orgData
+        localStorage.orgData = orgData;
      
 }
 
-addTask = (dashId, columbId, tasksId) => {
+addTask = (dashId, columbId, tasksId, taskName, taskDescription) => {
     for (const [key, values] of Object.entries(orgData)) {
         if (key == 'dashBoards') {
             for (const [key2, values2] of Object.entries(values)) {
                 if (key2 === dashId) {
                     for (const [key3, value3] of Object.entries(values2)) {
                         if (key3 === columbId ) {
-                            for (const [key4, value4] of Object.entries(3)) {
+                            for (const [key4, value4] of Object.entries(value3)) {
+                                if (key4 === 'tasks') {
+                                    key4 = {
+                                        [tasksId] : {
+                                            taskName: taskName,
+                                            description:  taskDescription,
+                                            subtask: {},
+                                        },
+                                        ...value4
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    localStorage.orgData = orgData;
+}
 
+addSubTask = (dashId, columbId, tasksId, subtaskId, subtaskDescription) =>  {
+    for (const [key, values] of Object.entries(orgData)) {
+        if (key == 'dashBoards') {
+            for (const [key2, values2] of Object.entries(values)) {
+                if (key2 === dashId) {
+                    for (const [key3, value3] of Object.entries(values2)) {
+                        if (key3 === columbId) {
+                            for (const [key4, value4] of Object.entries(value3)) {
+                                if (key4 === 'tasks') {
+                                    for (const [key5, value5] of Object.entries(value4)) {
+                                        if (key5 === tasksId) {
+                                            for (const [key6, value6] of Object.entries(value5)) {
+                                                if (key6 === 'subtask') {
+                                                   key6 = {
+                                                    [subtaskId]: {
+                                                        description: subtaskDescription
+                                                    },
+                                                    ...value6
+                                                   }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -73,6 +117,8 @@ addTask = (dashId, columbId, tasksId) => {
         }
     }
 }
+
+
 
  
 // Data Structure

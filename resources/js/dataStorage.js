@@ -88,6 +88,8 @@ addColumbs = (dashId, columbId, columbName) => {
 
 
 
+
+
 addTask = (dashId, columbId, tasksId, taskName, taskDescription) => {
     for (const [key, values] of Object.entries(orgData)) {
         if (key == 'dashBoards') {
@@ -97,14 +99,29 @@ addTask = (dashId, columbId, tasksId, taskName, taskDescription) => {
                         if (key3 === columbId ) {
                             for (const [key4, value4] of Object.entries(value3)) {
                                 if (key4 === 'tasks') {
-                                    key4 = {
-                                        [tasksId] : {
-                                            taskName: taskName,
-                                            description:  taskDescription,
-                                            subtask: {},
-                                        },
-                                        ...value4
+                                    data = {
+                                        ...orgData,
+                                        dashBoards: {
+                                            ...values,
+                                            key2: {
+                                                ...values2,
+                                                columbs: {
+                                                   ...value3,
+                                                   [columbId] : {
+                                                    ...value4,
+                                                     tasks: {
+                                                        
+                                                     }
+                                                   }
+                                                   
+                                                   
+                                                }
+                                            }
+    
+                                        }
                                     }
+                                    localStorage.orgData = JSON.stringify(data);
+                                    orgData = JSON.parse(localStorage.getItem('orgData'))
                                 }
                             }
                         }

@@ -94,34 +94,47 @@ addTask = (dashId, columbId, tasksId, taskName, taskDescription) => {
     for (const [key, values] of Object.entries(orgData)) {
         if (key == 'dashBoards') {
             for (const [key2, values2] of Object.entries(values)) {
-                if (key2 === dashId) {
+                if (parseInt(key2) === dashId) {
                     for (const [key3, value3] of Object.entries(values2)) {
-                        if (key3 === columbId ) {
+                        if (key3 === 'columbs' ) {
                             for (const [key4, value4] of Object.entries(value3)) {
-                                if (key4 === 'tasks') {
-                                    data = {
-                                        ...orgData,
-                                        dashBoards: {
-                                            ...values,
-                                            key2: {
-                                                ...values2,
-                                                columbs: {
-                                                   ...value3,
-                                                   [columbId] : {
-                                                    ...value4,
-                                                     tasks: {
-                                                        
-                                                     }
-                                                   }
-                                                   
-                                                   
+                                if (parseInt(key4) === columbId) {
+                                    for (const [key5, value5] of Object.entries(value4)) {
+                                    
+                                        if ( key5 === 'tasks') {  
+                                                data = {
+                                                    ...orgData,
+                                                    dashBoards: {
+                                                        ...values,
+                                                        [key2]: {
+                                                            ...values2,
+                                                            columbs: {
+                                                            ...value3,
+                                                            [columbId] : {
+                                                                ...value4,
+                                                                tasks : {
+                                                                    ...value5,
+                                                                    [tasksId] : {
+                                                                        taskName: taskName,
+                                                                        taskDescription: taskDescription,
+                                                                        subTasks: {
+
+                                                                        }
+                                                                    }
+                                                                }
+                                                                
+                                                            }
+                                                            
+                                                            
+                                                            }
+                                                        }
+                
+                                                    }
                                                 }
-                                            }
-    
+                                                localStorage.orgData = JSON.stringify(data);
+                                                orgData = JSON.parse(localStorage.getItem('orgData'))
                                         }
-                                    }
-                                    localStorage.orgData = JSON.stringify(data);
-                                    orgData = JSON.parse(localStorage.getItem('orgData'))
+                                }
                                 }
                             }
                         }
@@ -130,71 +143,68 @@ addTask = (dashId, columbId, tasksId, taskName, taskDescription) => {
             }
         }
     }
-    localStorage.orgData = orgData;
 }
+
 
 addSubTask = (dashId, columbId, tasksId, subtaskId, subtaskDescription) =>  {
     for (const [key, values] of Object.entries(orgData)) {
         if (key == 'dashBoards') {
             for (const [key2, values2] of Object.entries(values)) {
-                if (key2 === dashId) {
+                if (parseInt(key2) === dashId) {
                     for (const [key3, value3] of Object.entries(values2)) {
-                        if (key3 === columbId) {
+                        if (key3 === 'columbs' ) {
                             for (const [key4, value4] of Object.entries(value3)) {
-                                if (key4 === 'tasks') {
+                                if (parseInt(key4) === columbId) {
                                     for (const [key5, value5] of Object.entries(value4)) {
-                                        if (key5 === tasksId) {
-                                            for (const [key6, value6] of Object.entries(value5)) {
-                                                if (key6 === 'subtask') {
-                                                   key6 = {
-                                                    [subtaskId]: {
-                                                        description: subtaskDescription
-                                                    },
-                                                    ...value6
-                                                   }
+                                        if (key5 === 'tasks') {
+                                            for ( const [key6, value6] of Object.entries(value5)) {
+                                                if (parseInt(key6) === tasksId) {
+                                                    for (const [key7, value7] of Object.entries(value6)) {
+                                                        if (key7 === 'subTasks') {
+                                                            data = {
+                                                                ...orgData,
+                                                                dashBoards: {
+                                                                    ...values,
+                                                                    [key2]: {
+                                                                        ...values2,
+                                                                        columbs: {
+                                                                        ...value3,
+                                                                        [columbId] : {
+                                                                            ...value4,
+                                                                            tasks : {
+                                                                                ...value5,
+                                                                                [tasksId] : {
+                                                                                    ...value6,
+                                                                                    subTasks: {
+                                                                                        ...value7,
+                                                                                        [subtaskId]: subtaskDescription
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                            
+                                                                        }
+                                                                        
+                                                                        
+                                                                        }
+                                                                    }
+                            
+                                                                }
+                                                            }
+                                                            localStorage.orgData = JSON.stringify(data);
+                                                            orgData = JSON.parse(localStorage.getItem('orgData'))
+                                                            
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
                                     }
                                 }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
- 
-// Data Structure
-/*
-    {
-        theme: color
-        dashboards {
-            [id of dashboard]: {
-                name : string
-                columbs : {
-                    [id of columb] : {
-                        columbName: string
-                        tasks : {
-                            [id of task] : {
-                                taskName : string
-                                description: string
-                                subtask : {
-                                    [id of subtask] : {
-                                        description : string
-                                    }
                                 }
                             }
                         }
                     }
                 }
             }
-        }
+        } 
     }
-*/
-
-// Possible Bugs to be tested
-// 1) validity of orgData (funcs : addColumbs) after appending keys
-// 2) Repetition of 14 n 15
